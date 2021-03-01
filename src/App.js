@@ -17,7 +17,8 @@ const formatData = (allStatistics) => {
       country: item.country || 'NA',
       totalCases: item.cases.total || 'NA',
       active: item.cases.active || 'NA',
-      death: item.deaths.total || 'NA'
+      death: item.deaths.total || 'NA',
+      recovered: item.cases.recovered || 'NA'
     };
   })
   return data;
@@ -28,6 +29,7 @@ const columns = [
   { id: 'totalCases', label: 'Total Cases/million', minWidth: 80 },
   { id: 'active', label: 'Active /million', minWidth: 80 },
   { id: 'death', label: 'Death Cases/million', minWidth: 80 },
+  { id: 'recovered', label: 'Recovered/million', minWidth: 80 },
 ];
 function App() {
 

@@ -18,12 +18,3 @@ export const getStatistics = async () => {
         return []
     }
 };
-
-// export const getGistForked = async (gistId) => {
-//     try {
-//         const data = await axios.get(`gists/${gistId}/forks`);
-//         return data.data;
-//     } catch (error) {
-//         return []
-//     }
-// };
