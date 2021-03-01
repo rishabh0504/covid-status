@@ -33,7 +33,7 @@ const ChartComponent = (props) => {
                     argumentField="country"
                 />
                 <Title
-                    text="Covid report (Showing 7 Countries only for now)"
+                    text="Covid report per million (Showing 7 Countries only for now)"
                 />
                 <EventTracker />
                 <Tooltip />
