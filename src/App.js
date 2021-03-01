@@ -2,14 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { getStatistics } from './api/covid-api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-// import FileDetails from './components/FileDetails.component';
-// import OwnerDetails from './components/OwnerDetails.compoent';
 import Header from './components/Header.component';
 import TableComponent from './components/Table.component';
-
-
-
-
+import ChartComponent from './components/Chart.component';
 
 const formatData = (allStatistics) => {
   const data = allStatistics.map(item => {
@@ -24,6 +19,16 @@ const formatData = (allStatistics) => {
   return data;
 }
 
+const formatChartData = (allChartData) => {
+  const allData = allChartData.map(item => {
+    return {
+      country: item.country,
+      totalCases: item.totalCases || 'NA',
+    }
+  })
+  return allData;
+}
+
 const columns = [
   { id: 'country', label: 'Country', minWidth: 100 },
   { id: 'totalCases', label: 'Total Cases/million', minWidth: 80 },
@@ -31,16 +36,20 @@ const columns = [
   { id: 'death', label: 'Death Cases/million', minWidth: 80 },
   { id: 'recovered', label: 'Recovered/million', minWidth: 80 },
 ];
+
 function App() {
 
   const [countryName, setCountryName] = useState("");
   const [statistics, setStatistics] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
+  const [chartData, setChartData] = useState([]);
 
   useEffect(async () => {
     const statistics = await getStatistics();
-    const data = formatData(statistics.response)
+    const data = formatData(statistics.response);
+    const chartData = formatChartData(data.slice(0, 7));
     setStatistics(data);
+    setChartData(chartData);
     setFilteredData(data);
   }, []);
 
@@ -64,6 +73,7 @@ function App() {
       </div>
       <TableComponent filteredData={filteredData} columns={columns} />
 
+      <ChartComponent chartData={chartData} />
     </div>
   );
 }
